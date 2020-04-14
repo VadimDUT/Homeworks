@@ -1,80 +1,43 @@
-#include <iostream>
-#include "palendrom2.h" 
-using namespace std;
+﻿#include <iostream>
+#include <ctime>
+#include <cstdlib>
+#include <iomanip>
 
-void faktorial(int numb) {
-    int rezult = 1;
-    for (int i = 1; i <= numb; i++)
-        rezult *= i;
-    cout << numb << "! = " << rezult << endl;
-}
-
-int faktorial2(int numb) {
-    int rezult = 1;
-    for (int i = 1; i <= numb; i++)
-        rezult *= i;
-    return rezult;
-}
-
-bool palindrom5(int);
-
-
-int main()
-{
-    setlocale(LC_ALL, "Rus");
-
-    cout << "Приклад 1"<<endl;
-    int digit;
-    cout << "Enter number:";
-    cin >> digit;
-    faktorial(digit);
-
-    cout << endl;
-
-    cout << "Приклад 2" << endl;
-    int digit2;
-    cout << "Enter number:";
-    cin >> digit2;
-    cout << digit << "! = " << faktorial2(digit2) << endl;
-
-    cout << endl;
-
-    cout << "Приклад 3" << endl;
-    cout << "Enter 5zn-e chislo:";    
-    int in_number, out_number; 
-    cin >> in_number;    
-    out_number = in_number; 
-    if (palindrom5(in_number))
-        cout << "Number" << out_number << " - palendrom" << endl;   
-    else       
-        cout << "This is not palendrom" << endl;
-
-    cout << endl;
-
-    cout << "Приклад 4" << endl;
-    cout << "Enter 5zn-e chislo:";
-    int in_number2, out_number2;
-    cin >> in_number2;
-    out_number2 = in_number;
-    if (palindrom6(in_number2))
-        cout << "Number" << out_number2 << " - palendrom" << endl;
-    else
-        cout << "This is not palendrom" << endl;
-
-    return 0;
-}
-    
-bool palindrom5(int number) 
-{ int balance1, balance2, balance4, balance5; 
-balance1 = number% 10; 
-number = number / 10;
-balance2 = number % 10; 
-number = number / 100;
-balance4 = number % 10; 
-number = number / 10;
-balance5 = number % 10; 
-if ((balance1 == balance5) && (balance2 == balance4))       
-return true; 
-else       
-return false;  
+	using namespace std;
+	int main(int argc, char* argv[]) {
+		setlocale(LC_ALL, "Rus");
+	//1-ый пример
+	int* x = new int;
+	*x = 9;
+	cout << "переменная х = " << *x << endl << endl;
+	delete x;
+	
+	//2-ый пример: одномерный массив
+	srand(time(NULL));
+	float* mas = new float[10];
+	for (int i = 0; i < 10; i++)
+		mas[i] = (rand() % 10 + 1) / float((rand() % 10 + 1));
+	cout << "mas = " << endl;
+	for (int i = 0; i < 10; i++)
+		cout << setprecision(2) << mas[i] << endl;
+	delete[] mas;
+	cout << endl << endl;
+	
+	//3-ый пример: двомерный массив
+	srand(time(NULL));
+	float** mas1 = new float* [2];
+	for (int count = 0; count < 2; count++)
+		mas1[count] = new float[5];
+	for (int i = 0; i < 2; i++)
+		for (int j = 0; j < 5; j++)
+			mas1[i][j] = (rand() % 10 + 1) / float((rand() % 10 + 1));
+	for (int i = 0; i < 2; i++) {
+		for (int j = 0; j < 5; j++)
+			cout << '\t' << setprecision(2) << mas1[i][j] << '\t';
+		cout << endl;
 	}
+	for (int count = 0; count < 2; count++)
+		delete[] mas1[count];
+	return 0;
+
+}
